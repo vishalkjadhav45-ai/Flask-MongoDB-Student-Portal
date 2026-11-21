@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Submission Portal</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101b35, #173b70, #1765a5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            color: #1e293b;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 490px;
+        }
+
+        .brand {
+            text-align: center;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .brand-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .brand h1 {
+            font-size: 27px;
+            font-weight: 700;
+            letter-spacing: .3px;
+        }
+
+        .brand p {
+            color: #cbdcf5;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .form-card {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 20px 55px rgba(0, 0, 0, .25);
+        }
+
+        .form-heading {
+            margin-bottom: 25px;
+        }
+
+        .form-heading h2 {
+            font-size: 21px;
+            color: #172b4d;
+        }
+
+        .form-heading p {
+            font-size: 13px;
+            color: #718096;
+            margin-top: 7px;
+        }
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #dce3ed;
+            border-radius: 9px;
+            font-size: 14px;
+            font-family: inherit;
+            color: #1e293b;
+            background: #f9fbfe;
+            outline: none;
+            transition: .2s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #2878d0;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(40, 120, 208, .12);
+        }
+
+        textarea {
+            min-height: 115px;
+            resize: vertical;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #a0aec0;
+        }
+
+        .error {
+            background: #fff1f1;
+            border: 1px solid #fecaca;
+            color: #b42318;
+            padding: 12px 14px;
+            border-radius: 9px;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 9px;
+            padding: 14px;
+            margin-top: 4px;
+            background: linear-gradient(100deg, #1765c0, #2788e8);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .25s ease;
+            box-shadow: 0 5px 14px rgba(23, 101, 192, .22);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(23, 101, 192, .32);
+        }
+
+        .submit-btn:disabled {
+            opacity: .75;
+            cursor: wait;
+            transform: none;
+        }
+
+        .api-link {
+            text-align: center;
+            margin-top: 23px;
+        }
+
+        .api-link a {
+            color: #2674c9;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .api-link a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            color: #cbdcf5;
+            text-align: center;
+            font-size: 11px;
+            margin-top: 22px;
+        }
+
+        @media (max-width: 500px) {
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .brand h1 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+            <h1>Student Submission Portal</h1>
+            <p>A simple and secure way to submit your information</p>
+        </div>
+
+        <div class="form-card">
+
+            <div class="form-heading">
+                <h2>📝 Student Information</h2>
+                <p>Please complete the details below.</p>
+            </div>
+
+            {% if error %}
+                <div class="error">⚠️ {{ error }}</div>
+            {% endif %}
+
+            <form action="/submit" method="POST" id="submissionForm">
+
+                <div class="form-group">
+                    <label for="name">👤 Full Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">✉️ Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@email.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="message">💬 Message</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Write your message here..."
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Submit Information →
+                </button>
+
+            </form>
+
+            <div class="api-link">
+                <a href="/api">↗ View JSON API</a>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            Powered by Flask & MongoDB
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById("submissionForm").addEventListener("submit", function () {
+            const button = document.getElementById("submitBtn");
+            button.disabled = true;
+            button.textContent = "⏳ Submitting...";
+        });
+    </script>
+
+</body>
+</html>
